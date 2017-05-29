@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "333084449463",
+    "firebase_url": "https://bcconnected-d3ed6.firebaseio.com",
+    "project_id": "bcconnected-d3ed6",
+    "storage_bucket": "bcconnected-d3ed6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333084449463:android:a29a737142365e10",
+        "android_client_info": {
+          "package_name": "com.tareksaidee.bcconnected"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333084449463-9c82r2gi8igbu0m5s4dh1te4hgpqhf9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tareksaidee.bcconnected",
+            "certificate_hash": "64c77e6dfab501a99fc1de3ba195b3438adddafd"
+          }
+        },
+        {
+          "client_id": "333084449463-3bftge4l2d5fvq0brkurqq144ljltuuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqeYqecdKKrpvkZmMAjderJLCAJFgyXTo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333084449463-3bftge4l2d5fvq0brkurqq144ljltuuj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
