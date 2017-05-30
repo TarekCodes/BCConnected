@@ -30,7 +30,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
     @Override
     public RoomsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.rooms_list_layout, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.rooms_list_item, parent, false);
         return new RoomsViewHolder(view);
     }
 
@@ -60,13 +60,19 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         roomsList.clear();
     }
 
-    class RoomsViewHolder extends RecyclerView.ViewHolder {
+    class RoomsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final TextView roomName;
 
         RoomsViewHolder(View view){
             super(view);
             roomName = (TextView) view.findViewById(R.id.room_name);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }
