@@ -5,4 +5,9 @@
         android:id="@+id/add_new_room"
         android:title="New Room"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sign_out"
+        android:title="Sign Out"
+        app:showAsAction="never" />
 </menu>

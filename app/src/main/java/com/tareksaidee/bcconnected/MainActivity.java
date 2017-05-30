@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Log.e("some", user.getDisplayName() );
                     Toast.makeText(MainActivity.this, "You're signed in!", Toast.LENGTH_SHORT).show();
                     initilizeSignIn(user.getDisplayName());
                 } else {
@@ -96,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("rooms", mRoomsAdapter.getRooms());
                 startActivity(intent);
                 return true;
+            case R.id.sign_out:
+                AuthUI.getInstance().signOut(this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(MainActivity.this, "You're signed in!", Toast.LENGTH_SHORT).show();
+                //signed in
             } else {
                 if (resultCode == RESULT_CANCELED) {
                     finish();
