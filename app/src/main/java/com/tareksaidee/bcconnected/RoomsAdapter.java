@@ -55,6 +55,11 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         return (HashMap<String,String>) rooms;
     }
 
+    void clear(){
+        rooms.clear();
+        roomsList.clear();
+    }
+
     class RoomsViewHolder extends RecyclerView.ViewHolder {
 
         final TextView roomName;
