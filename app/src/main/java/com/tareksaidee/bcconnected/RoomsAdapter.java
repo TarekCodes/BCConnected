@@ -1,6 +1,7 @@
 package com.tareksaidee.bcconnected;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,11 +22,13 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     private final Context mContext;
     Map<String, String> rooms;
     ArrayList<String> roomsList;
+    String mUserName;
 
     RoomsAdapter(@NonNull Context context){
         mContext = context;
         rooms = new HashMap<>();
         roomsList = new ArrayList<>();
+        mUserName = null;
     }
 
     @Override
@@ -60,6 +63,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         roomsList.clear();
     }
 
+    void setUserName(String name){
+        mUserName = name;
+    }
+
     class RoomsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final TextView roomName;
@@ -72,7 +79,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(mContext, Chat.class);
+            intent.putExtra("room", ((TextView) view.findViewById(R.id.room_name)).getText().toString());
+            intent.putExtra("username", mUserName);
+            mContext.startActivity(intent);
         }
     }
 }

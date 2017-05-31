@@ -18,6 +18,7 @@ public class CreateRoom extends AppCompatActivity {
     Button createRoomButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mRoomsDatabaseReference;
+    private DatabaseReference indivRoomRef;
     private HashMap<String, String> rooms;
 
     @Override
@@ -28,7 +29,7 @@ public class CreateRoom extends AppCompatActivity {
         roomNameField = (EditText) findViewById(R.id.room_name_field);
         createRoomButton = (Button) findViewById(R.id.create_room_button);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mRoomsDatabaseReference = mFirebaseDatabase.getReference();
+        mRoomsDatabaseReference = mFirebaseDatabase.getReference().child("rooms");
         createRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +40,8 @@ public class CreateRoom extends AppCompatActivity {
                         return;
                     }
                     mRoomsDatabaseReference.push().setValue(name);
+                    /*indivRoomRef = mFirebaseDatabase.getReference().child(name);
+                    indivRoomRef.push().setValue(new ChatMessage("Welcome!","BC Connected"));*/
                     finish();
                 }
             }

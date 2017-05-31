@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mUsername = ANONYMOUS;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mRoomsDatabaseReference = mFirebaseDatabase.getReference();
+        mRoomsDatabaseReference = mFirebaseDatabase.getReference().child("rooms");
         mFirebaseAuth = FirebaseAuth.getInstance();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_rooms);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     void initilizeSignIn(String name) {
         mUsername = name;
+        mRoomsAdapter.setUserName(name);
         attachDatabaseReadListener();
     }
 
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
     void cleanUpOnSignout() {
         mUsername = ANONYMOUS;
         mRoomsAdapter.clear();
+        mRoomsAdapter.setUserName(null);
         detachReadListener();
     }
 
