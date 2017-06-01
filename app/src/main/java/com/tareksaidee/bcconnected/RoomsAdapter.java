@@ -20,8 +20,8 @@ import java.util.Map;
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder> {
 
     private final Context mContext;
-    Map<String, String> rooms;
-    ArrayList<String> roomsList;
+    Map<String, Room> rooms;
+    ArrayList<Room> roomsList;
     String mUserName;
 
     RoomsAdapter(@NonNull Context context){
@@ -39,7 +39,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
     @Override
     public void onBindViewHolder(RoomsViewHolder holder, int position) {
-        String name = roomsList.get(position);
+        String name = roomsList.get(position).getName();
         holder.roomName.setText(name);
     }
 
@@ -48,14 +48,14 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         return rooms.size();
     }
 
-    void addRoom(String name){
-        rooms.put(name,name);
-        roomsList.add(name);
+    void addRoom(Room room){
+        rooms.put(room.getName(),room);
+        roomsList.add(room);
         notifyDataSetChanged();
     }
 
-    HashMap<String, String> getRooms(){
-        return (HashMap<String,String>) rooms;
+    HashMap<String, Room> getRooms(){
+        return (HashMap<String,Room>) rooms;
     }
 
     void clear(){

@@ -39,9 +39,7 @@ public class CreateRoom extends AppCompatActivity {
                         Toast.makeText(CreateRoom.this,"Already exists",Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    mRoomsDatabaseReference.push().setValue(name);
-                    /*indivRoomRef = mFirebaseDatabase.getReference().child(name);
-                    indivRoomRef.push().setValue(new ChatMessage("Welcome!","BC Connected"));*/
+                    mRoomsDatabaseReference.push().setValue(new Room(name));
                     finish();
                 }
             }

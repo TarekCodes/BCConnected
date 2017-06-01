@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             mRoomsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    mRoomsAdapter.addRoom(dataSnapshot.getValue(String.class));
+                    mRoomsAdapter.addRoom(dataSnapshot.getValue(Room.class));
                 }
 
                 @Override
