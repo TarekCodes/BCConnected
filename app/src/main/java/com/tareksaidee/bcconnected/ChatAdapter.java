@@ -20,11 +20,12 @@ import java.util.ArrayList;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
     ArrayList<ChatMessage> messages;
-    Context mContext;
+    private Context mContext;
 
     ChatAdapter(@NonNull Context context){
         mContext = context;
         messages = new ArrayList<>();
+
     }
 
     @Override
@@ -39,6 +40,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         String name = message.getName();
         String text = message.getText();
         holder.userName.setText(name);
+        if(message.getUserPhoto() != null) {
+            Glide.with(holder.userImage.getContext())
+                    .load(message.getUserPhoto())
+                    .into(holder.userImage);
+        }
+        else
+            holder.userImage.setImageResource(R.drawable.com_facebook_profile_picture_blank_square);
         boolean isPhoto = message.getPhotoUrl() != null;
         if (isPhoto) {
             holder.messageText.setVisibility(View.GONE);
@@ -73,12 +81,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         TextView userName;
         TextView messageText;
         ImageView photoImageView;
+        ImageView userImage;
 
         ChatViewHolder(View view){
             super(view);
             userName = (TextView) view.findViewById(R.id.nameTextView);
             messageText = (TextView) view.findViewById(R.id.messageTextView);
             photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
+            userImage = (ImageView) view.findViewById(R.id.user_image);
         }
     }
 

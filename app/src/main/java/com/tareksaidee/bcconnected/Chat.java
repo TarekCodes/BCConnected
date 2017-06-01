@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,7 @@ public class Chat extends AppCompatActivity {
 
     String roomName;
     String mUsername;
+    String mUserPhoto;
 
     private EditText mMessageEditText;
     private Button mSendButton;
@@ -49,6 +51,7 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         roomName = getIntent().getStringExtra("room");
         mUsername = getIntent().getStringExtra("username");
+        mUserPhoto = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
         messagesView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mPhotoPickerButton = (ImageButton) findViewById(R.id.photoPickerButton);
@@ -56,7 +59,7 @@ public class Chat extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(roomName);
         mFirebaseStorage = FirebaseStorage.getInstance();
-        mChatPhotosStorageReference = mFirebaseStorage.getReference().child(roomName+"_photos");
+        mChatPhotosStorageReference = mFirebaseStorage.getReference().child(roomName + "_photos");
         mChatAdapter = new ChatAdapter(this);
         messagesView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         messagesView.setAdapter(mChatAdapter);
@@ -64,7 +67,8 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: Send messages on click
-                ChatMessage friendlyMessage = new ChatMessage(mMessageEditText.getText().toString(), mUsername, null);
+                ChatMessage friendlyMessage = new ChatMessage(mMessageEditText.getText().toString(),
+                        mUsername, null, mUserPhoto);
                 mMessagesDatabaseReference.push().setValue(friendlyMessage);
                 // Clear input box
                 mMessageEditText.setText("");
@@ -88,6 +92,7 @@ public class Chat extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     ChatMessage temp = dataSnapshot.getValue(ChatMessage.class);
                     mChatAdapter.add(temp);
+                    messagesView.smoothScrollToPosition(mChatAdapter.getItemCount());
                 }
 
                 @Override
@@ -147,14 +152,14 @@ public class Chat extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle unsuccessful uploads
-                    Log.e("error",exception.getLocalizedMessage());
+                    Log.e("error", exception.getLocalizedMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    ChatMessage friendlyMessage = new ChatMessage(null, mUsername, downloadUrl.toString());
+                    ChatMessage friendlyMessage = new ChatMessage(null, mUsername, downloadUrl.toString(), mUserPhoto);
                     mMessagesDatabaseReference.push().setValue(friendlyMessage);
                 }
             });

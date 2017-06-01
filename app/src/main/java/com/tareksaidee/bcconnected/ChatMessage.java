@@ -8,15 +8,17 @@ public class ChatMessage {
     private String text;
     private String name;
     private String photoUrl;
+    private String userPhoto;
 
 
     ChatMessage() {
     }
 
-    ChatMessage(String text, String name, String photoUrl) {
+    ChatMessage(String text, String name, String photoUrl, String userPhoto) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
+        this.userPhoto = userPhoto;
     }
 
     public String getText() {
@@ -41,6 +43,14 @@ public class ChatMessage {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public void setUserPhoto(String userPhoto){
+        this.userPhoto = userPhoto;
+    }
+
+    public String getUserPhoto(){
+        return userPhoto;
     }
 
 }
