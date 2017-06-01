@@ -38,6 +38,7 @@ public class Chat extends AppCompatActivity {
     private Button mSendButton;
     private ImageButton mPhotoPickerButton;
     private RecyclerView messagesView;
+    private LinearLayoutManager layoutManager;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
@@ -61,7 +62,8 @@ public class Chat extends AppCompatActivity {
         mFirebaseStorage = FirebaseStorage.getInstance();
         mChatPhotosStorageReference = mFirebaseStorage.getReference().child(roomName + "_photos");
         mChatAdapter = new ChatAdapter(this);
-        messagesView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        messagesView.setLayoutManager(layoutManager);
         messagesView.setAdapter(mChatAdapter);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +94,7 @@ public class Chat extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     ChatMessage temp = dataSnapshot.getValue(ChatMessage.class);
                     mChatAdapter.add(temp);
-                    messagesView.smoothScrollToPosition(mChatAdapter.getItemCount());
+                    layoutManager.smoothScrollToPosition(messagesView,null,mChatAdapter.getItemCount()-1);
                 }
 
                 @Override
