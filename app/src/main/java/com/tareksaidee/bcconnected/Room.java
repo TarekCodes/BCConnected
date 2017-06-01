@@ -1,10 +1,12 @@
 package com.tareksaidee.bcconnected;
 
+import java.io.Serializable;
+
 /**
  * Created by tarek on 5/31/2017.
  */
 
-public class Room {
+public class Room implements Serializable{
 
     private String name;
 

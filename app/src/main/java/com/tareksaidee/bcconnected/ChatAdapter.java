@@ -3,11 +3,13 @@ package com.tareksaidee.bcconnected;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -33,10 +35,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(ChatAdapter.ChatViewHolder holder, int position) {
-        String name = messages.get(position).getName();
-        String text = messages.get(position).getText();
-        holder.messageText.setText(text);
+        ChatMessage message = messages.get(position);
+        String name = message.getName();
+        String text = message.getText();
         holder.userName.setText(name);
+        boolean isPhoto = message.getPhotoUrl() != null;
+        if (isPhoto) {
+            holder.messageText.setVisibility(View.GONE);
+            holder.photoImageView.setVisibility(View.VISIBLE);
+            Glide.with(holder.photoImageView.getContext())
+                    .load(message.getPhotoUrl())
+                    .into(holder.photoImageView);
+        }
+        else{
+            holder.messageText.setVisibility(View.VISIBLE);
+            holder.photoImageView.setVisibility(View.GONE);
+            holder.messageText.setText(text);
+        }
     }
 
     @Override
@@ -45,7 +60,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     }
 
     void add(ChatMessage message){
-        Log.e("size", messages.size()+"");
         messages.add(message);
         notifyDataSetChanged();
     }
@@ -58,11 +72,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
         TextView userName;
         TextView messageText;
+        ImageView photoImageView;
 
         ChatViewHolder(View view){
             super(view);
             userName = (TextView) view.findViewById(R.id.nameTextView);
             messageText = (TextView) view.findViewById(R.id.messageTextView);
+            photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
         }
     }
 
