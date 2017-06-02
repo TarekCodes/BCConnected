@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">BC Connected</string>
-    <string name="drawer_open">Drawer Open</string>
-    <string name="drawer_closed">Drwaer Closed</string>
-    <array name="drawer_options">
-        <item>Profile</item>
-    </array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
 
