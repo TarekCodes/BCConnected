@@ -13,9 +13,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String[] mDrawerOptions;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView navigationView;
+    private ImageView userPicView;
+    private TextView usernameTextView;
+    private TextView userEmailTextView;
+    private View navHeaderView;
 
 
     @Override
@@ -70,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navHeaderView = navigationView.getHeaderView(0);
+        userPicView = (ImageView) navHeaderView.findViewById(R.id.imageView_header);
+        usernameTextView = (TextView) navHeaderView.findViewById(R.id.username_header);
+        userEmailTextView = (TextView) navHeaderView.findViewById(R.id.user_email_header);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_rooms);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRoomsAdapter = new RoomsAdapter(this);
@@ -80,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Toast.makeText(MainActivity.this, "You're signed in!", Toast.LENGTH_SHORT).show();
-                    initilizeSignIn(user.getDisplayName());
+                    initilizeSignIn(user);
                 } else {
                     startActivityForResult(
                             AuthUI.getInstance()
@@ -97,10 +109,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    void initilizeSignIn(String name) {
-        mUsername = name;
-        mRoomsAdapter.setUserName(name);
+    void initilizeSignIn(FirebaseUser user) {
+        mUsername = user.getDisplayName();
+        mRoomsAdapter.setUserName(mUsername);
         attachDatabaseReadListener();
+        if (user.getPhotoUrl() != null) {
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .into(userPicView);
+        }
+        usernameTextView.setText(mUsername);
+        userEmailTextView.setText(user.getEmail());
     }
 
     @Override
