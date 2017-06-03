@@ -6,17 +6,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.tareksaidee.bcconnected.CreateRoom">
+
     <EditText
         android:id="@+id/room_name_field"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:inputType="text"
-        android:hint="Room Name"/>
-    
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Room Name"
+        android:inputType="text" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/password_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:hint="password here"
+            android:inputType="numberPassword"
+            android:maxLength="4" />
+
+        <CheckBox
+            android:id="@+id/password_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_margin="16dp"
+            android:checked="false"
+            android:text="Password" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/create_room_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREATE"/>
+        android:layout_gravity="center"
+        android:layout_margin="32dp"
+        android:text="CREATE" />
 
 </LinearLayout>

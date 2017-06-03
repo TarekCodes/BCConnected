@@ -260,3 +260,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 }
 
 //TODO sort rooms by whatever
+//TODO room passwords
+//TODO my rooms
+//TODO send documents

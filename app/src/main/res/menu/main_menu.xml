@@ -4,7 +4,7 @@
     <item
         android:id="@+id/add_new_room"
         android:title="New Room"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/sign_out"
