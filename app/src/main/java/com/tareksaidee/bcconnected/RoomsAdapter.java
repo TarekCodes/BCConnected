@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,13 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
     @Override
     public void onBindViewHolder(RoomsViewHolder holder, int position) {
-        String name = roomsList.get(position).getName();
+        Room temp = roomsList.get(position);
+        String name = temp.getName();
         holder.roomName.setText(name);
+        if(!temp.isLocked())
+            holder.lockedIcon.setVisibility(View.INVISIBLE);
+        else
+            holder.lockedIcon.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -75,10 +81,12 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     class RoomsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final TextView roomName;
+        ImageView lockedIcon;
 
         RoomsViewHolder(View view) {
             super(view);
             roomName = (TextView) view.findViewById(R.id.room_name);
+            lockedIcon = (ImageView) view.findViewById(R.id.locked_icon);
             view.setOnClickListener(this);
         }
 
