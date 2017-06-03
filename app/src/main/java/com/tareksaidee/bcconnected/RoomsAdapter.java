@@ -86,12 +86,13 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
         public void onClick(View view) {
             final Room temp = rooms.get(((TextView) view.findViewById(R.id.room_name)).getText().toString());
             if (temp.isLocked()) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Title");
 
                 final EditText input = new EditText(mContext);
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                 builder.setView(input);
+                builder.setTitle("Enter Password");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -101,8 +102,9 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
                             intent.putExtra("username", mUserName);
                             mContext.startActivity(intent);
                         }
-                        else
-                            Toast.makeText(mContext,"Wrong Password", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(mContext, "Wrong Password", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
