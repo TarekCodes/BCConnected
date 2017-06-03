@@ -39,7 +39,8 @@ public class CreateRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = roomNameField.getText().toString();
-                if (!name.equals("") && (!passwordCheckBox.isChecked() || !passwordNumber.getText().toString().equals(""))) {
+                if (!name.equals("") && !name.equals("rooms") &&
+                        (!passwordCheckBox.isChecked() || !passwordNumber.getText().toString().equals(""))) {
                     if (rooms.containsKey(name)) {
                         Toast.makeText(CreateRoom.this, "Already exists", Toast.LENGTH_SHORT).show();
                         return;
