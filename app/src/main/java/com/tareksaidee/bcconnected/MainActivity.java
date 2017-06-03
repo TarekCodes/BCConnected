@@ -262,5 +262,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //TODO sort rooms by whatever
 //TODO my rooms
 //TODO send documents
-//TODO long click to copy/save
+//TODO long click to save
 //TODO enter to send/ok

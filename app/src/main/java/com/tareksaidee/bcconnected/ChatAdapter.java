@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
@@ -80,14 +81,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
         TextView userName;
         TextView messageText;
-        ImageView photoImageView;
+        PhotoView photoImageView;
         ImageView userImage;
 
         ChatViewHolder(View view){
             super(view);
             userName = (TextView) view.findViewById(R.id.nameTextView);
             messageText = (TextView) view.findViewById(R.id.messageTextView);
-            photoImageView = (ImageView) view.findViewById(R.id.photoImageView);
+            photoImageView = (PhotoView) view.findViewById(R.id.photoImageView);
             userImage = (ImageView) view.findViewById(R.id.user_image);
         }
     }

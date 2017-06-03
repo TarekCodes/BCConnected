@@ -22,11 +22,12 @@
         android:layout_weight="8"
         android:orientation="vertical">
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/photoImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:contentDescription="Chat Image" />
 
         <TextView
             android:id="@+id/messageTextView"
