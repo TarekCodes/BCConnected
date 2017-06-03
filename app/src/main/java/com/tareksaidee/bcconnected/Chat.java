@@ -57,6 +57,7 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         roomName = getIntent().getStringExtra("room");
         mUsername = getIntent().getStringExtra("username");
+        setTitle(roomName);
         mUserPhoto = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
         messagesView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);

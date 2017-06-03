@@ -260,8 +260,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 }
 
 //TODO sort rooms by whatever
-//TODO indicate that a room is locked
 //TODO my rooms
 //TODO send documents
-//TODO room name on the top
 //TODO long click to copy/save
+//TODO enter to send/ok
