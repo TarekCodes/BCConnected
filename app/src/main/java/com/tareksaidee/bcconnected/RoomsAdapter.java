@@ -56,13 +56,13 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
 
     @Override
     public int getItemCount() {
-        return rooms.size();
+        return roomsList.size();
     }
 
     void addRoom(Room room) {
         rooms.put(room.getName(), room);
         roomsList.add(room);
-        notifyDataSetChanged();
+        notifyItemInserted(roomsList.size());
     }
 
     HashMap<String, Room> getRooms() {

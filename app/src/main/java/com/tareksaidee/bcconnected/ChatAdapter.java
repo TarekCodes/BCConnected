@@ -6,11 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     ArrayList<ChatMessage> messages;
     private Context mContext;
 
-    ChatAdapter(@NonNull Context context){
+    ChatAdapter(@NonNull Context context) {
         mContext = context;
         messages = new ArrayList<>();
 
@@ -41,13 +41,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         String name = message.getName();
         String text = message.getText();
         holder.userName.setText(name);
-        if(message.getUserPhoto() != null) {
+        if (message.getUserPhoto() != null) {
             Glide.with(holder.userImage.getContext())
                     .load(message.getUserPhoto())
                     .into(holder.userImage);
-        }
-        else
-            holder.userImage.setImageResource(R.drawable.com_facebook_profile_picture_blank_square);
+        } else
+            Glide.with(holder.userImage.getContext())
+                    .load(R.drawable.com_facebook_profile_picture_blank_square)
+                    .into(holder.userImage);
         boolean isPhoto = message.getPhotoUrl() != null;
         if (isPhoto) {
             holder.messageText.setVisibility(View.GONE);
@@ -55,8 +56,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             Glide.with(holder.photoImageView.getContext())
                     .load(message.getPhotoUrl())
                     .into(holder.photoImageView);
-        }
-        else{
+        } else {
             holder.messageText.setVisibility(View.VISIBLE);
             holder.photoImageView.setVisibility(View.GONE);
             holder.messageText.setText(text);
@@ -68,12 +68,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         return messages.size();
     }
 
-    void add(ChatMessage message){
+    void add(ChatMessage message) {
         messages.add(message);
         notifyDataSetChanged();
     }
 
-    void clear(){
+    void clear() {
         messages.clear();
     }
 
@@ -82,14 +82,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         TextView userName;
         TextView messageText;
         PhotoView photoImageView;
-        ImageView userImage;
+        RoundedImageView userImage;
 
-        ChatViewHolder(View view){
+        ChatViewHolder(View view) {
             super(view);
             userName = (TextView) view.findViewById(R.id.nameTextView);
             messageText = (TextView) view.findViewById(R.id.messageTextView);
             photoImageView = (PhotoView) view.findViewById(R.id.photoImageView);
-            userImage = (ImageView) view.findViewById(R.id.user_image);
+            userImage = (RoundedImageView) view.findViewById(R.id.user_image);
         }
     }
 

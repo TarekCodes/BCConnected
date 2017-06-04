@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.Arrays;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String[] mDrawerOptions;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView navigationView;
-    private ImageView userPicView;
+    private RoundedImageView userPicView;
     private TextView usernameTextView;
     private TextView userEmailTextView;
     private View navHeaderView;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navHeaderView = navigationView.getHeaderView(0);
-        userPicView = (ImageView) navHeaderView.findViewById(R.id.imageView_header);
+        userPicView = (RoundedImageView) navHeaderView.findViewById(R.id.imageView_header);
         usernameTextView = (TextView) navHeaderView.findViewById(R.id.username_header);
         userEmailTextView = (TextView) navHeaderView.findViewById(R.id.user_email_header);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_rooms);
@@ -261,6 +261,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //TODO sort rooms by whatever
 //TODO my rooms
-//TODO send documents
+//TODO send documents and audio
 //TODO long click to save
 //TODO enter to send/ok

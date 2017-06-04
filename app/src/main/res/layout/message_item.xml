@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/user_image"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:baselineAlignBottom="true"
-        android:src="@drawable/com_facebook_profile_picture_blank_square" />
+        android:src="@drawable/com_facebook_profile_picture_blank_square"
+        app:riv_border_color="@android:color/holo_red_dark"
+        app:riv_border_width="1dip"
+        app:riv_corner_radius="30dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true"
+        app:riv_tile_mode="repeat" />
 
     <LinearLayout
         android:layout_width="0dp"
