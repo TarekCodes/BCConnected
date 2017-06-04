@@ -62,7 +62,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     void addRoom(Room room) {
         rooms.put(room.getName(), room);
         roomsList.add(room);
-        notifyItemInserted(roomsList.size());
+        notifyDataSetChanged();
     }
 
     HashMap<String, Room> getRooms() {
@@ -72,6 +72,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsViewHol
     void clear() {
         rooms.clear();
         roomsList.clear();
+        notifyDataSetChanged();
     }
 
     void setUserName(String name) {
