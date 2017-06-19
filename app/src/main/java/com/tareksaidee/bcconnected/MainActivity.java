@@ -264,3 +264,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //TODO send documents and audio
 //TODO long click to save
 //TODO enter to send/ok
+//TODO number of participants per room
