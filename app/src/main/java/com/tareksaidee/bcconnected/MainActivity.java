@@ -1,6 +1,7 @@
 package com.tareksaidee.bcconnected;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,9 +15,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.InputStream;
 import java.util.Arrays;
 
 
@@ -55,12 +57,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView usernameTextView;
     private TextView userEmailTextView;
     private View navHeaderView;
+    private ImageView background;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        background = (ImageView) findViewById(R.id.mainactivity_bg);
+        InputStream stream = this.getResources().openRawResource(R.raw.bclogo);
+        background.setImageBitmap(BitmapFactory.decodeStream(stream));
         mUsername = ANONYMOUS;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mRoomsDatabaseReference = mFirebaseDatabase.getReference().child("rooms");
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(MainActivity.this, "You're signed in!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "You're signed in!", Toast.LENGTH_SHORT).show();
                     initilizeSignIn(user);
                 } else {
                     startActivityForResult(
