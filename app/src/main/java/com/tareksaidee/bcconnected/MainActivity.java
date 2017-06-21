@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,12 +59,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView userEmailTextView;
     private View navHeaderView;
     private ImageView background;
+    private ProgressBar mProgressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         background = (ImageView) findViewById(R.id.mainactivity_bg);
         InputStream stream = this.getResources().openRawResource(R.raw.bclogo);
         background.setImageBitmap(BitmapFactory.decodeStream(stream));
@@ -158,12 +162,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mRoomsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    mProgressBar.setVisibility(View.INVISIBLE);
                     mRoomsAdapter.addRoom(dataSnapshot.getValue(Room.class));
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
@@ -271,3 +275,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //TODO long click to save
 //TODO enter to send/ok
 //TODO number of participants per room
+//TODO if a chat room is empty, loading symbol doesn't go away

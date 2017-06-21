@@ -9,11 +9,18 @@
     tools:context="com.tareksaidee.bcconnected.MainActivity"
     tools:openDrawer="start">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
     <ImageView
         android:id="@+id/mainactivity_bg"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="16dp"
         android:alpha="0.1" />
 
     <LinearLayout
@@ -42,6 +49,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main_activity"
         app:menu="@menu/activity_test_drawer" />
+
+
 
 </android.support.v4.widget.DrawerLayout>
 

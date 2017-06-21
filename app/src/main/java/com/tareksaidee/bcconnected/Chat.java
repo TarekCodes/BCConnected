@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,11 +51,15 @@ public class Chat extends AppCompatActivity {
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mChatPhotosStorageReference;
     private ChatAdapter mChatAdapter;
+    private ProgressBar mProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
         roomName = getIntent().getStringExtra("room");
         mUsername = getIntent().getStringExtra("username");
         setTitle(roomName);
@@ -120,6 +125,7 @@ public class Chat extends AppCompatActivity {
                     ChatMessage temp = dataSnapshot.getValue(ChatMessage.class);
                     mChatAdapter.add(temp);
                     layoutManager.smoothScrollToPosition(messagesView,null,mChatAdapter.getItemCount()-1);
+                    mProgressBar.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
